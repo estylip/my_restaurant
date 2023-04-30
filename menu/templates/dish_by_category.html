@@ -1,0 +1,28 @@
+<style>
+  .flex-container >li{
+  width: 300px;
+  margin: 10px;
+  line-height: 40px;
+  
+}
+</style>
+{%extends 'layout2.html'%}
+{%block content%}
+    <ul class="flex-container" style=" display: flex;  flex-wrap: wrap;justify-content: space-evenly;">
+        {% for dish in dish_list%}
+        {% if dish.category.id == category.id%}
+        <li style="text-decoration: none; padding: 20px;">
+          <div class="card" style="width: 15rem; border: 1.5px solid black;" >
+              <img src="{{dish.imageUrl}}" class="card-img-top" style="width:237px; height: 150px;" >
+              <div class="card-body" id="{{dish.category}}">
+                <h4 class="card-title" style="color:rgb(63, 139, 63)">{{dish.name}}</h4>
+                <p class="card-text">{{dish.description}}</p>
+                <div style=" margin-bottom: 3px; text-align: left;">{{dish.price}} ש"ח</div>
+                <a href="{% url 'cart' id=dish.id%}" style="font-size: 20px;">+</a>
+              </div>
+            </div>
+      </li>
+      {%endif%}
+        {%endfor%}
+      </ul>
+{%endblock content%}

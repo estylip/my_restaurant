@@ -1,0 +1,57 @@
+{%extends 'layout2.html'%} {% block content%}
+<style>
+  input {
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: none;
+    width: 200px;
+    border-color: green;
+  }
+  label {
+    width: 300px;
+  }
+  .row {
+    width: 350px;
+    margin: 10px;
+  }
+
+
+</style>
+<body>
+  
+
+<form action="{%url 'change_dt' id=request.user.id%}" method="POST">
+  {%csrf_token%}
+
+  <div class="container text-center" style="margin-right: 500px; margin-top: 50px;">
+    <div class="row">
+      <label>שם פרטי:</label>
+      <input type="text" name="fname"  value="{{user.first_name}}" />
+    </div>
+    <div class="row">
+      <label>שם משפחה </label>
+      <input type="text" name="lname" value="{{user.last_name}}" />
+    </div>
+    <div class="row">
+      <label>אימייל </label>
+      <input type="email" name="email"  value="{{user.email}}"/>
+    </div>
+    <div class="row">
+      <label> שם משתמש: </label>
+      <input type="text" name="username" value="{{user.username}}" />
+    </div>
+    </div>
+    <div class="row">
+      <input
+        class="btn btn-dark"
+        type="submit"
+        value="שינוי פרטים"
+        style="width: 250px; height: 50px; margin-right: 550px;margin-top: 50px;"
+      />
+    </div>
+  </div>
+
+ 
+</form>
+</body>
+{%endblock content%}

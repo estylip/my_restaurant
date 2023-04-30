@@ -1,0 +1,16 @@
+{%extends 'layout2.html'%}
+{%block content%}
+
+
+  <div class="card" style="width: 600px; margin-top: 50px; margin-right: 450px;">
+    <div class="card-header" style="text-align: center;">
+     שלום {{request.user.first_name}}!
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: center;">משלוח מספר: {{new_order.order_id}}</h5>
+      <p class="card-text" >{{new_order.created}}</p>
+      <p class="card-text">סה"כ לתשלום: {{total}} ש"ח</p>
+      <a href="{%url 'logout'%}" class="btn btn-success" style="margin-right: 465px;">להתראות</a>
+    </div>
+  </div>
+  {%endblock content%}

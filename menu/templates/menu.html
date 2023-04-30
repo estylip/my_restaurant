@@ -1,0 +1,67 @@
+<style>
+.container{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  
+}
+.container >li{
+  width: 300px;
+  margin: 10px;
+  line-height: 60px;
+  
+}
+</style>
+{%extends 'layout2.html'%} {%block content%}
+
+<form action="{%url 'menu'%}"  method="POST">
+  {%csrf_token%}
+  <div class="flex-container" style="display: flex; ">
+    <ul>
+      {% for category in categories%}
+      <li style="list-style-type: none; width: 100px; height: 160px ;margin: 5px;">
+        <a href="{%url 'dish_categories' id=category.id%}" style="text-decoration: none;  color: black">
+          <img
+            src="{{category.imageUrl}}"
+            style="width: 80px; height: 80px; border-radius: 180px"
+          />
+          {{category.name}}</a
+        >
+      </li>
+      {%endfor%}
+    </ul>
+   
+      <ul class="container" >
+        {% for dish in dish_list%}
+        <li style="text-decoration: none; padding: 20px;">
+          <div class="card" style="width: 15rem; border: 1.5px solid black;" >
+            <img src="{{dish.imageUrl}}" class="card-img-top" style="width:237px; height: 150px;" >
+            <div class="card-body" id="{{dish.category}}">
+            <h4 class="card-title" style="color:rgb(63, 139, 63)">{{dish.name}}</h4>
+            <p class="card-text">{{dish.description}}</p>
+            {% if dish.is_gloten_free == True %}
+              <div>&#9745;  מכיל גלוטן</div>
+              {%else%}
+              <div>&#9746; מכיל גלוטן</div>
+            {%endif%}
+
+            {% if dish.is_vegeration == True %}
+            <div>&#9745;   צמחוני</div>
+            {%else%}
+            <div>&#9746; צמחוני</div>
+          {%endif%}
+          
+              
+              
+              <div style=" margin-bottom: 3px; text-align: left;"><b>{{dish.price}} ש"ח</b></div>
+                
+            </div>
+          </div>
+        </li>
+        {%endfor%}
+      </ul>
+    
+    
+  </div>
+</form>
+{%endblock content%}

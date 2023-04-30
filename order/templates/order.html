@@ -1,0 +1,46 @@
+<style>
+    form{
+        margin-right: 550px;
+        margin-top: 50px;
+        border: 1.5px solid black;
+        border-radius: 10px;
+        width: 350px;
+        height: 380px;
+    }
+    .mb-3{
+       width: 300px;
+       padding: 25px;
+    }
+    button{
+        width: 300px;
+        margin: 25px;
+    }
+    .mb-3 input{
+        border-color: green;
+    }
+    .mb-3 textarea{
+        border-color: green;
+    }
+</style>
+{%extends 'layout2.html'%}
+{%block content%}
+<form action="{% url 'finish_order' %}" method="POST">
+    {%csrf_token%}
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">כתובת למשלוח</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="adress" >
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">הערות...</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" col="3" name="comment"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-outline-success" class="mb-3">שלח</button>
+
+      </div>
+</form>
+
+
+
+{%endblock content%}
+

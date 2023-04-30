@@ -1,0 +1,33 @@
+
+{%extends 'layout2.html'%}
+{%block content%}
+
+<form action="{% url 'order' %}" method="POST">
+    {%csrf_token%}
+
+    <h3 style=" text-align: center;color:rgb(63, 139, 63);" >העגלה שלי</h3>
+    <ul class="flex-container" style=" display: flex;  flex-wrap: wrap;justify-content: space-evenly;">
+    {% for item in list_item %}
+       <div class="card" style="width: 15rem; border: 1.5px solid black;" >
+        <img src="{{item.dish.imageUrl}}" class="card-img-top" style="width:237px; height: 150px;" >
+        <div class="card-body" id="{{item.dish_id.category}}">
+          <h4 class="card-title" style="color:rgb(63, 139, 63)">{{item.dish.name}}</h4>
+          <p class="card-text">{{item.dish.description}}</p>
+          <p class="card-text"><b> סה"כ: {{item.amount}}</b></p>
+          <div style=" margin-bottom: 3px; text-align: left;">{{item.dish.price}} ש"ח</div>
+         <a href="{%url 'delete_item' id=item.dish.id %}" style="text-decoration: none; color:rgb(63, 139, 63)">&#128465;</a>
+        </div>
+       </div>
+   
+    {%endfor%} 
+   </ul>
+
+  
+    <a  href="{% url 'menu'%}" style="text-decoration: none; font-size: 100px; color: black; margin-right: 150px;">&#9758; </a>
+    <a  href="{% url 'menu'%}" style="text-decoration: none; font-size: 15px; color: black; margin-right: -70px;"> חזור</a>
+
+    <button type="submit" style="margin-right:900px ; font-size: 100px; background-color: white;border:none">&#9756; </button>
+ 
+     
+</form>
+{%endblock content %}

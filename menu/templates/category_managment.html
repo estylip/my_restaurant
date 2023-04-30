@@ -1,0 +1,29 @@
+<style>
+  .flex-container >li{
+  width: 300px;
+  margin: 10px;
+  line-height: 60px;
+  
+}
+</style>
+{%extends 'layout3.html'%}
+{%block content%}
+<form action="{%url 'all_categories'%}"  style="direction: rtl;">
+    {%csrf_token%}
+    <h3 style="color:rgb(63, 139, 63); text-align: center;">הקטגוריות שלנו</h3>
+    <a href="{%url 'add_category'%}" class="btn btn-success" style="margin-right: 1200px;">קטגוריה חדשה</a>
+    <ul  class="flex-container"  style="display: flex;  flex-wrap: wrap; justify-content: space-evenly;">
+    {% for category in category_list%}
+    <li style="text-decoration: none; padding: 20px; ">
+      <div class="card" style="width: 15rem;border: 1.5px solid black;">
+          <img src="{{category.imageUrl}}" class="card-img-top" style="width:237px; height: 150px;" >
+          <div class="card-body">
+            <h4 class="card-title" style="color:rgb(63, 139, 63)">{{category.name}}</h4>            
+            <a href="{% url 'edit_category' id=category.id %}" class="btn btn-dark">עריכה</a>
+            <a href="{%url 'delete_category' id=category.id %}" class="btn btn-dark">מחיקה</a>
+          </div>
+        </div>
+  </li>
+    {%endfor%}</ul>
+</form>    
+{%endblock%}

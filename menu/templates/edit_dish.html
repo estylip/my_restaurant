@@ -1,0 +1,101 @@
+
+    <style>
+      form{
+       background-color: #d5f3d7;
+      }
+    input[type=text ], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type=url ], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type=checkbox ] {
+      margin: 8px 0; 
+      display: inline-block;
+    }
+    input[type=submit] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+     </style>
+     {%extends 'layout3.html'%}
+     {%block content%}
+    <form action="{% url 'edit_dish' id=dish.id %}" method="POST">
+    {%csrf_token%}
+    <h3 style="color:rgb(63, 139, 63); text-align: center; margin-top: 15px;"> עריכת מנה </h3>
+    <label >שם:</label>
+        <input type="text" value="{{dish.name}}" name="name" >
+    
+        <label >מחיר</label>
+        <input type="text" value="{{dish.price}}" name="price" >
+    
+        <label >תיאור המנה:</label>
+        <input type="text" value="{{dish.description}}"  name="description">
+    
+        <label > קישור:</label>
+        <input type="url" value="{{dish.imageUrl}}" name="imageUrl">
+        <div>
+         {% if dish.is_gloten_free == True %}
+         <div>
+            <input type="checkbox" value="{{dish.is_gloten_free}}" checked  name="is_gloten_free">
+            <label > מכיל גלוטן?</label>
+          </div>
+            
+         {%else%}
+         <div>
+            <input type="checkbox" value="{{dish.is_gloten_free}}"   name="is_gloten_free">
+            <label > מכיל גלוטן?</label>
+          </div>
+         {%endif%}
+       </div>
+
+
+       <div>
+         {% if dish.is_vegeration == True %}
+         <div>
+            <input type="checkbox" value="{{dish.is_vegeration}}" checked name="is_vegeration">
+            <label > צמחוני?</label>
+          </div>
+            
+         {%else%}
+         <div>
+            <input type="checkbox" value="{{dish.is_vegeration}}"  name="is_vegeration">
+            <label >צמחוני?</label>
+          </div>
+         {%endif%}
+       </div>
+      
+        <select name="categories" required aria-required="true" >
+          {% for category in categories %}
+          <option value="{{category.id}}">{{category.name}}</option>
+          {%endfor%}
+      </select>
+
+
+        <input type="submit" value="ערוך">
+    </form>
+    {%endblock content%}
+   

@@ -1,0 +1,64 @@
+{%extends 'layout.html'%} {% block content%}
+<style>
+  input {
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: none;
+    width: 200px;
+    border-color: green;
+  }
+  label {
+    width: 300px;
+  }
+  .row {
+    width: 350px;
+    margin: 10px;
+  }
+
+
+</style>
+<body>
+  
+
+<form action="{% url 'signup' %}" method="POST" >
+  {%csrf_token%}
+
+  <div class="container text-center" style="margin-right: 500px; margin-top: 50px;">
+    <div class="row">
+      <label>שם פרטי:</label>
+      <input type="text" name="fname" minlength="3" maxlength="16" pattern="[א-תa-zA-z]+" title="שדה שם פרטי אינו יכול להכיל ספרות"   required />
+    </div>
+    <div class="row">
+      <label>שם משפחה </label>
+      <input type="text" name="lname" minlength="3" maxlength="16" pattern="[א-תa-zA-Z]+" title="שדה שם פרטי אינו יכול להכיל ספרות" required />
+    </div>
+    <div class="row">
+      <label>אימייל </label>
+      <input type="email" name="email" required />
+    </div>
+    <div class="row">
+      <label> שם משתמש: </label>
+      <input type="text" name="username" required />
+    </div>
+    <div class="row">
+      <label>סיסמא </label>
+      <input type="password" name="password" pattern="[0-9]+" title="שדה סיסמא חייב להכיל ספרות בלבד"  required />
+    </div>
+    <div class="row">
+      <label>אתה מנהל? </label>
+      <input type="checkbox" name="is_staff" />
+    </div>
+    <div class="row">
+      <input
+        class="btn btn-dark"
+        type="submit"
+        value="הרשמה"
+        style="width: 250px; height: 50px; margin-right:55px;"
+      />
+    </div>
+  </div>
+
+  
+</form>
+</body>
+{%endblock content%}

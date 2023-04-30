@@ -1,0 +1,36 @@
+
+<style>
+  .flex-container>li{
+    width: 300px;
+  margin: 10px;
+  line-height: 40px;
+  }
+</style>
+{%extends 'layout3.html'%}
+{%block content%}
+<form action="{%url 'all_dishes'%}">
+{%csrf_token%}
+<h3 style="color:rgb(63, 139, 63); text-align: center; margin-top: 15px;">המנות שלנו</h3>
+<a href="{%url 'add_dish'%}" class="btn btn-success" style="margin-right: 1200px;">מנה חדשה</a>
+
+<ul  class="flex-container" style=" display: flex;  flex-wrap: wrap;justify-content: space-evenly;">
+ {% for dish in dishes%} 
+ <li style="text-decoration: none; padding: 20px;">
+    <div class="card" style="width: 15rem; border: 1.5px solid black">
+        <img src="{{dish.imageUrl}}" class="card-img-top" style="width:237px; height: 150px;" >
+        <div class="card-body">
+          <h4 class="card-title" style="color:rgb(63, 139, 63)">{{dish.name}}</h4>
+          <p class="card-text">{{dish.description}}</p>
+          <div style=" margin-bottom: 3px; text-align: left;">{{dish.price}} ש"ח</div>
+          <a href="{%url 'edit_dish' id=dish.id%}" class="btn btn-dark">&#9998;</a>
+          <a href="{%url 'delete_dish' id=dish.id%}" class="btn btn-dark" style="color:white">
+            &#x1F5D1;
+          </a>
+          
+        </div>
+      </div>
+</li>
+ {%endfor%}  
+</ul>
+</form>
+{%endblock content%}
